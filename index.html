@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hindenburg map</title>
 
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #3b6b1a;
+            color: black;
+            padding: 20px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* LANGUAGE MENU */
+        .lang-container {
+            position: absolute;
+            top: 110px;
+            right: 30px;
+            background: white;
+            border: 2px solid black;
+            padding: 10px;
+            z-index: 3;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        /* BACKGROUND ZONE */
+        .background-zone {
+            min-height: calc(100vh - 90px); /* hauteur écran - header */
+            background-size: cover;
+            background-position: center;
+            transition: background-image 2s ease-in-out;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        /* BIG BUTTONS */
+        .btn {
+            border: 4px solid black;
+            padding: 35px 100px;
+            background: white;
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #eaeaea;
+        }
+
+        /* FOOTER */
+        footer {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 14px;
+            color: white;
+            z-index: 3;
+        }
+
+        .legal {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: white;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Hindenburg map
+</header>
+
+<div class="lang-container">
+    <label for="lang"><strong>Lang</strong></label><br>
+    <select id="lang" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+    </select>
+</div>
+
+<!-- IMAGE + CONTENU -->
+<div class="background-zone" id="bgZone">
+    <button class="btn" id="btn1">What is this Website ?</button>
+    <button class="btn" id="btn2">The Map</button>
+</div>
+
+<footer>© Hindenburg map</footer>
+<div class="legal">legal notices</div>
+
+<script>
+    /* BACKGROUND ROTATION */
+    let bgIndex = 1;
+    const totalBackgrounds = 3;
+
+    function changeBackground() {
+        document.getElementById("bgZone").style.backgroundImage =
+            `url('Back${bgIndex}.jpg')`;
+        bgIndex++;
+        if (bgIndex > totalBackgrounds) bgIndex = 1;
+    }
+
+    changeBackground();
+    setInterval(changeBackground, 5000);
+
+    /* LANGUAGE SYSTEM */
+    const texts = {
+        en: {
+            btn1: "What is this Website ?",
+            btn2: "The Map",
+            legal: "legal notices"
+        },
+        fr: {
+            btn1: "Qu'est-ce que ce site ?",
+            btn2: "La carte",
+            legal: "mentions légales"
+        },
+        de: {
+            btn1: "Was ist diese Website?",
+            btn2: "Die Karte",
+            legal: "Impressum"
+        }
+    };
+
+    function changeLanguage() {
+        const lang = document.getElementById("lang").value;
+        document.getElementById("btn1").textContent = texts[lang].btn1;
+        document.getElementById("btn2").textContent = texts[lang].btn2;
+        document.querySelector(".legal").textContent = texts[lang].legal;
+    }
+</script>
+
+</body>
+</html>
