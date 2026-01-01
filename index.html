@@ -147,29 +147,38 @@
     /* LANGUAGE SYSTEM */
     const texts = {
         en: {
-            btn1: "What is this Website ?",
-            btn2: "The Map",
+            btnWebsite: "What is this website ?",
+            btnMap: "The Map",
             legal: "legal notices"
         },
         fr: {
-            btn1: "Qu'est-ce que ce site ?",
-            btn2: "La carte",
+            btnWebsite: "Qu'est-ce que ce site ?",
+            btnMap: "La carte",
             legal: "mentions légales"
         },
         de: {
-            btn1: "Was ist diese Website?",
-            btn2: "Die Karte",
+            btnWebsite: "Was ist diese Website?",
+            btnMap: "Die Karte",
             legal: "Impressum"
         }
     };
 
     function changeLanguage() {
         const lang = document.getElementById("lang").value;
-        document.getElementById("btn1").textContent = texts[lang].btn1;
-        document.getElementById("btn2").textContent = texts[lang].btn2;
-        document.querySelector(".legal").textContent = texts[lang].legal;
+
+        // Boutons (on utilise leur position dans le DOM)
+        const buttons = document.querySelectorAll(".btn");
+        buttons[0].textContent = texts[lang].btnWebsite;
+        buttons[1].textContent = texts[lang].btnMap;
+
+        // Texte légal sans casser le lien
+        document.querySelector(".legal a").textContent = texts[lang].legal;
     }
+
+    // Appliquer la langue par défaut (anglais)
+    changeLanguage();
 </script>
+
 
 </body>
 </html>
